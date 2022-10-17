@@ -1,22 +1,28 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-
-var database = [80401, 10001, 60007, 90001, 81620]
+import styles from './dashboard.module.css'
+import { useNavigate } from 'react-router-dom'
 
 export function Dashboard() {
-
-
+    const navigate = useNavigate()
     return (
-        <>
-           <div>Cities</div>
-           {database.map((city, i)=>{
-            return(
-            <div>
-                <Link className={`button-${i}`} to={`/deposit/${city}`}>{city}</Link>
+        <div className={styles.dashCont}>
+            <div onClick={() => navigate('/NewCustomer')}>
+                New Customer
             </div>
-           )})
-        }
-
-        </>
+            <div onClick={() => navigate('/deposit')}>
+                Deposit
+            </div>
+            <div onClick={() => navigate('/withdraw')}>
+                Withdrawals
+            </div>
+            <div onClick={() => navigate('/transfer')}>
+                Transfer
+            </div>
+            <div onClick={() => navigate('/balance')}>
+                Balance
+            </div>
+            <div onClick={() => navigate('/nav')}>
+                My Nav-Bar
+            </div>
+        </div>
     )
 }

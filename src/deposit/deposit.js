@@ -1,28 +1,23 @@
-import {useParams} from "react-router-dom"
-import {useEffect, useState} from "react"
+import styles from './deposit.module.css'
 
 export function Deposit() {
-    const [temperature, setTemperature] = useState(0)
-    const { productId } = useParams()
-    console.log("-----------")
-    console.log(productId)
-    console.log("-----------")
 
-
-    useEffect(()=>{
-        fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${productId},us&appid=6cba9d01ef70f28fac514fe4db61ef58&units=imperial`)
-        .then(data=>data.json())
-        .then(cleanedData=>{
-            //console.log(cleanedData.main.temp)
-            setTemperature(cleanedData.main.temp)
-        })
-    },[])
-
+    const onDeposit = (e) => {
+    e.preventDefault()
+    console.log(e.target)
+    const acId = e.target.acId.value
+    const amount = e.target.amount.value
+    console.log(`Id ${acId} Amount ${amount}`)
+    }
 
     return (
-        <>
-            My Deposit
-            <div>{temperature}</div>
-        </>
+    <div className={styles.depCont}>  
+        <h1>Deposit</h1>
+        <form onSubmit={onDeposit}>
+            <input type='number' placeholder='Account Id' name='acId' />
+            <input type='number' placeholder='Amount' name='amount' />
+            <input type='submit' value='Deposit' />
+        </form>
+    </div>
     )
 }
